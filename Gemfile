@@ -47,3 +47,5 @@ end
 
   gem 'devise'
   gem 'carrierwave'
+  gem 'protected_attributes'
+  gem 'better_errors'
