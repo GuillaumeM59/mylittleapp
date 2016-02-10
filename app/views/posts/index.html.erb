@@ -1,32 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
-
-<p>
-  <strong>Avatar:</strong>
-  <%= image_tag(@user.avatar, size: "50") %>
-</p>
-
-<h2> Liste des messages</h2>
+<h1>Listing Posts</h1>
 
 <table>
   <thead>
     <tr>
       <th>Title</th>
       <th>Content</th>
+      <th>From</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @posts.each do |post| %>
-    <% if @user.id == post.user_id%>
       <tr>
         <td><%= link_to "#{post.title}", post %></td>
         <td><%= post.content %></td>
+        <td><%= link_to "#{post.username}", user_path(post.user_id) %></td>
         <td><%= link_to 'Show', post %></td>
         <% if post.user_id == current_user.id%>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
@@ -34,9 +25,9 @@
         <%end%>
       </tr>
     <% end %>
-    <% end %>
   </tbody>
 </table>
 
-<%= link_to 'Edit',  edit_user_registration_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<br>
+
+<%= link_to 'New Post', new_post_path %>

@@ -1,13 +1,13 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-
+has_many :post
  mount_uploader :avatar, AvatarUploader
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-         attr_accessible :email, :username, :password, :remember_me, :avatar, :avatar_cache, :remove_avatar
+         attr_accessible :email,:avatar, :username, :password, :remember_me, :avatar, :avatar_cache, :remove_avatar
 
          validates_presence_of   :avatar
          validates_integrity_of  :avatar
