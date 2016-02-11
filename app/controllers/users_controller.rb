@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @posts=Post.all
+    @posts= Post.all
   end
 
   # GET /users/new
@@ -20,10 +20,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if @user == current_user
-    else
-      redirect_to root_path, :alert => "You are not the writer of the post, you can't update it"
-    end
+    # if @user == current_user
+    # else
+    #   redirect_to root_path, :alert => "You are not the writer of the post, you can't update it"
+    # end
   end
 
   # POST /users
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   else
-    redirect_to root_path, :alert => "You are not the writer of the post, you can't delete it"
+    redirect_to root_path, :alert => "You are not logged as this user, you can't delete it"
   end
   end
 
@@ -78,6 +78,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :email, :avatar, :password)
+      params.require(:user).permit(:username, :id, :email, :avatar, :password)
     end
 end

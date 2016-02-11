@@ -4,13 +4,15 @@ class User < ActiveRecord::Base
 has_many :post
  mount_uploader :avatar, AvatarUploader
 
+ validates_uniqueness_of :username
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
          attr_accessible :email,:avatar, :username, :password, :remember_me, :avatar, :avatar_cache, :remove_avatar
 
-         validates_presence_of   :avatar
-         validates_integrity_of  :avatar
-         validates_processing_of :avatar
+        #  validates_presence_of   :avatar
+        #  validates_integrity_of  :avatar
+        #  validates_processing_of :avatar
 
 end

@@ -15,6 +15,10 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def store_dir
  'public/userav/'  end
 
+ def default_url(*args)
+   "" + [version_name, "default.png"].compact.join('_')
+ end
+
 
   def cache_dir
  'public/userav_cache/'  end
