@@ -15,23 +15,25 @@
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
-          
+
         </button>
-        <a class="navbar-brand" href="#">MyLittleApp</a>
+      <%= link_to 'MyLittleApp', root_path, class: "navbar-brand" %>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="navcollaspe">
-        <div id="user_nav" class="navbar-right">
+
+        <div id="user_nav" id="navcollaspe" class="navbar-right collapse navbar-collapse">
             <% if user_signed_in? %>
             Logged in as <strong><%=current_user.username%><%= image_tag(current_user.avatar, size: "32") %></strong> .
             <%= link_to 'Edit profile', edit_user_registration_path %> |
+              <% if user_signed_in? && current_user.role == 1 %>
+              <%= link_to 'Manage Users', users_path %> |
+              <% end %>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
             <% else %>
             <%= link_to 'Sign up', new_user_registration_path %> |
             <%= link_to 'Login', new_user_session_path %>
             <% end %>
-        </div>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>

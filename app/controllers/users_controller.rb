@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    if current_user.role == 1
     @users = User.all
+    else
+      redirect_to root_path, :alert => "Access not allowed need to be Admin"
+    end
   end
 
   # GET /users/1
@@ -45,13 +49,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if @user.id == current_user.id || current_user.role == 1
+      respond_to do |format|
+        if @user.update(user_params)
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -59,15 +65,19 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    if @user.id == current_user.id
+    if @user.id == current_user.id || current_user.role == 1
+      Post.where(user_id: @user.id).find_each do |post|
+        post.destroy
+      end
     @user.destroy
+    @user.post.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
-  else
-    redirect_to root_path, :alert => "You are not logged as this user, you can't delete it"
-  end
+    else
+      redirect_to root_path, :alert => "You are not logged as this user, you can't delete it"
+    end
   end
 
   private
