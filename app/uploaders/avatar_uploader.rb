@@ -16,7 +16,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
  "#{Rails.root}/public/userav/"  end
 
  def default_url(*args)
-   "/" + [version_name, "default.png"].compact.join('_')
+   "#{Rails.root}/public/" + [version_name, "default.png"].compact.join('_')
  end
 
  def content_type_whitelist
