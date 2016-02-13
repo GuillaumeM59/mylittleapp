@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if current_user.role == 1
     @users = User.all
     else
-      redirect_to root_path, :alert => "Access not allowed need to be Admin"
+      redirect_to root_path, :alert => "Access not allowed, need to be Admin"
     end
   end
 
@@ -66,13 +66,9 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     if @user.id == current_user.id || current_user.role == 1
-      Post.where(user_id: @user.id).find_each do |post|
-        post.destroy
-      end
-    @user.destroy
-    @user.post.destroy
+        @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'User and his posts was successfully destroyed.' }
       format.json { head :no_content }
     end
     else
@@ -88,6 +84,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :id, :email, :avatar, :password, :role)
+      params.require(:user).permit(:username, :id, :email, {avatar: []}, :avatar_cache, :password, :role)
     end
 end

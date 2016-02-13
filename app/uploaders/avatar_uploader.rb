@@ -13,15 +13,18 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
- 'public/userav/'  end
+ "#{Rails.root}/public/userav/"  end
 
  def default_url(*args)
-   "" + [version_name, "default.png"].compact.join('_')
+   "/" + [version_name, "default.png"].compact.join('_')
  end
 
+ def content_type_whitelist
+    /image\//
+  end
 
   def cache_dir
- 'public/userav_cache/'  end
+ "#{Rails.root}/public/userav_cache"  end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url

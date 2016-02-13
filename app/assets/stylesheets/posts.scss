@@ -1,3 +1,30 @@
-// Place all the styles related to the Posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  background-color: rgb(19, 20, 55);
+  padding-top: 50px
+}
+h1{
+  color: rgb(64, 190, 160);
+  margin-bottom: 30px;
+}
+.btn-new {
+  display: block;
+  margin-left: 25%;
+  text-align: center;
+  width: 50%;
+  font-size: 1.5em
+}
+
+.message {
+  border-radius: 15px;
+  border: 2px solid rgb(245, 218, 118);
+  background-color: rgb(187, 187, 187);
+  padding: 10px 5px;
+  margin: 10px 20px;
+}
+
+.messagebloc p {
+  border-radius: 5px;
+  background-color: white;
+  font-size: 1.5em;
+  font-weight: 500;
+}
