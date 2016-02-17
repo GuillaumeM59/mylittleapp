@@ -9,11 +9,11 @@
 <body>
 
 
-  <nav class="navbar navbar-default navbar-fixed-top">
+  <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".nav_drop" aria-expanded="false">
           <span class="sr-only">Toggle navigation</span>
           <% if current_user%>
           <%= image_tag(current_user.avatar, size: "40") %>
@@ -24,7 +24,7 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
 
-        <div id="user_nav" id="navcollaspe" class="navbar-right collapse navbar-collapse">
+        <div id="user_nav" id="navcollapse" class="navbar-right collapse navbar-collapse nav_drop">
            <ul class="nav navbar-nav">
             <% if user_signed_in? %>
             <li class="status">Logged in as <strong><%=current_user.username%><%= image_tag(current_user.avatar, size: "32") %></strong></li> .
@@ -41,11 +41,9 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+<div class="message"> <%= flash_messages %></div>
 
 
-
-        <p class="notice"><%= notice %></p>
-         <p class="alert"><%= alert %></p>
 
 
 <%= yield %>
